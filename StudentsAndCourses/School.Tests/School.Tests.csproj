@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6A7D0F7D-326E-40A2-8D0B-2C1D3D3512FD}</ProjectGuid>
+    <ProjectGuid>{74F4C756-7718-469B-9BAD-2EB2C0B865C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>School.Tests</RootNamespace>
@@ -52,14 +52,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="StudentClassTests.cs" />
+    <Compile Include="SchoolClassTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CourseClassTests.cs" />
-    <Compile Include="SchoolClassTests.cs" />
+    <Compile Include="StudentClassTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\School\School.csproj">
-      <Project>{6a088f70-2242-44ab-8688-9b5e94995e2e}</Project>
+      <Project>{bfcd12b7-4053-4b2f-b47e-8cd1cc4bacea}</Project>
       <Name>School</Name>
     </ProjectReference>
   </ItemGroup>
