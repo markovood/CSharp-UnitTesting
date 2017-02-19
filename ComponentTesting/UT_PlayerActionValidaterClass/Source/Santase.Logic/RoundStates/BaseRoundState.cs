@@ -2,7 +2,7 @@
 {
     using Santase.Logic.PlayerActionValidate.Contracts;
 
-    public abstract class BaseRoundState : IBaseRoundState
+    public abstract class BaseRoundState
     {
         protected BaseRoundState(IStateManager round)
         {

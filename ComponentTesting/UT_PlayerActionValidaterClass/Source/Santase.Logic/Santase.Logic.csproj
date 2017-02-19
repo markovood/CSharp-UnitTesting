@@ -69,7 +69,6 @@
     <Compile Include="PlayerActionValidate\AnnounceValidator.cs" />
     <Compile Include="PlayerActionValidate\ChangeTrumpActionValidator.cs" />
     <Compile Include="PlayerActionValidate\CloseGameActionValidator.cs" />
-    <Compile Include="PlayerActionValidate\Contracts\IBaseRoundState.cs" />
     <Compile Include="PlayerActionValidate\Contracts\IPlayerAction.cs" />
     <Compile Include="PlayerActionValidate\Contracts\IPlayerTurnContext.cs" />
     <Compile Include="PlayerActionValidate\IAnnounceValidator.cs" />
