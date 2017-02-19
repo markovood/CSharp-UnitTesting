@@ -69,6 +69,9 @@
     <Compile Include="PlayerActionValidate\AnnounceValidator.cs" />
     <Compile Include="PlayerActionValidate\ChangeTrumpActionValidator.cs" />
     <Compile Include="PlayerActionValidate\CloseGameActionValidator.cs" />
+    <Compile Include="PlayerActionValidate\Contracts\IBaseRoundState.cs" />
+    <Compile Include="PlayerActionValidate\Contracts\IPlayerAction.cs" />
+    <Compile Include="PlayerActionValidate\Contracts\IPlayerTurnContext.cs" />
     <Compile Include="PlayerActionValidate\IAnnounceValidator.cs" />
     <Compile Include="PlayerActionValidate\IPlayerActionValidator.cs" />
     <Compile Include="PlayerActionValidate\PlayCardActionValidator.cs" />
@@ -95,6 +98,9 @@
     <Compile Include="WinnerLogic\IRoundWinnerPointsLogic.cs" />
     <Compile Include="WinnerLogic\RoundWinnerPoints.cs" />
     <Compile Include="WinnerLogic\RoundWinnerPointsPointsLogic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PlayerActionValidate\Abstract\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

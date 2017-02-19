@@ -1,8 +1,9 @@
 ﻿namespace Santase.Logic.Players
 {
+    using PlayerActionValidate.Contracts;
     using Santase.Logic.Cards;
 
-    public sealed class PlayerAction
+    public sealed class PlayerAction : IPlayerAction
     {
         private PlayerAction(PlayerActionType type, Card card)
         {
@@ -15,7 +16,7 @@
 
         public Card Card { get; }
 
-        internal Announce Announce { get; set; }
+        public Announce Announce { get; set; }
 
         public static PlayerAction PlayCard(Card card)
         {

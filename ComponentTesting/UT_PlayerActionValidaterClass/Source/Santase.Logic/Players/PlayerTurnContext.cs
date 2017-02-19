@@ -1,9 +1,10 @@
 ﻿namespace Santase.Logic.Players
 {
+    using PlayerActionValidate.Contracts;
     using Santase.Logic.Cards;
     using Santase.Logic.RoundStates;
 
-    public class PlayerTurnContext : IDeepCloneable<PlayerTurnContext>
+    public class PlayerTurnContext : IDeepCloneable<PlayerTurnContext>, IPlayerTurnContext
     {
         public PlayerTurnContext(
             BaseRoundState state,

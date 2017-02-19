@@ -62,6 +62,10 @@
     <Compile Include="GameMechanics\SantaseGameTests.cs" />
     <Compile Include="GameMechanics\TrickTestsForSantase.cs" />
     <Compile Include="GameMechanics\ValidPlayerWithMethodsCallCounting.cs" />
+    <Compile Include="PlayerActionValidate\AnnounceValidatorTests.cs" />
+    <Compile Include="PlayerActionValidate\ChangeTrumpActionValidatorTests.cs" />
+    <Compile Include="PlayerActionValidate\CloseGameActionValidatorTests.cs" />
+    <Compile Include="PlayerActionValidate\PlayCardActionValidatorTests.cs" />
     <Compile Include="Players\PlayerWithLoggerDecoratorTests.cs" />
     <Compile Include="WinnerLogic\CardWinnerLogicTests.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
@@ -69,10 +73,6 @@
     <Compile Include="GameMechanics\RoundResultTests.cs" />
     <Compile Include="Logger\MemoryLoggerTests.cs" />
     <Compile Include="Logger\NoLoggerTests.cs" />
-    <Compile Include="PlayerActionValidate\ChangeTrumpActionValidatorTests.cs" />
-    <Compile Include="PlayerActionValidate\CloseGameActionValidatorTests.cs" />
-    <Compile Include="PlayerActionValidate\PlayCardActionValidatorTests.cs" />
-    <Compile Include="PlayerActionValidate\AnnounceValidatorTests.cs" />
     <Compile Include="Players\BasePlayerTests.cs" />
     <Compile Include="Players\PlayerActionTests.cs" />
     <Compile Include="Players\PlayerTurnContextTests.cs" />

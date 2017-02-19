@@ -1,6 +1,8 @@
 ﻿namespace Santase.Logic.RoundStates
 {
-    public abstract class BaseRoundState
+    using Santase.Logic.PlayerActionValidate.Contracts;
+
+    public abstract class BaseRoundState : IBaseRoundState
     {
         protected BaseRoundState(IStateManager round)
         {

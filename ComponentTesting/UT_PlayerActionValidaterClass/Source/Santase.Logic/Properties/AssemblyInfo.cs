@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
+[assembly: InternalsVisibleTo("PlayerActionValidatorTests")]
 
 // Version information for an assembly consists of the following four values:
 //

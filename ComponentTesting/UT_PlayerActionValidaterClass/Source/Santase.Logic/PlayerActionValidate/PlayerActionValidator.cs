@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using Santase.Logic.Cards;
+    using Santase.Logic.PlayerActionValidate.Contracts;
     using Santase.Logic.Players;
 
     public class PlayerActionValidator : IPlayerActionValidator
@@ -15,7 +16,7 @@
 
         public static PlayerActionValidator Instance => Lazy.Value;
 
-        public bool IsValid(PlayerAction action, PlayerTurnContext context, ICollection<Card> playerCards)
+        public bool IsValid(IPlayerAction action, IPlayerTurnContext context, ICollection<Card> playerCards)
         {
             if (context.State.CanAnnounce20Or40)
             {
