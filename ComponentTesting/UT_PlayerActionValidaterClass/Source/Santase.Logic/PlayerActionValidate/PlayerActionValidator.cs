@@ -59,7 +59,7 @@
             return canCloseGame;
         }
 
-        public ICollection<Card> GetPossibleCardsToPlay(PlayerTurnContext context, ICollection<Card> playerCards)
+        public ICollection<Card> GetPossibleCardsToPlay(IPlayerTurnContext context, ICollection<Card> playerCards)
         {
             var possibleCardsToPlay = new List<Card>(playerCards.Count);
 

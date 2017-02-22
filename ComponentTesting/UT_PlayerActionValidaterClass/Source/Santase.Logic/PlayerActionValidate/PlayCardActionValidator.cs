@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using Santase.Logic.Cards;
+    using Contracts;
 
     internal static class PlayCardActionValidator
     {

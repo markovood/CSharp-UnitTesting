@@ -98,9 +98,7 @@
     <Compile Include="WinnerLogic\RoundWinnerPoints.cs" />
     <Compile Include="WinnerLogic\RoundWinnerPointsPointsLogic.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PlayerActionValidate\Abstract\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

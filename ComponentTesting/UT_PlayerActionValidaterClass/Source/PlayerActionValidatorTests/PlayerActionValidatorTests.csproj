@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fakes\FakeRoundStateCA2040False.cs" />
+    <Compile Include="Fakes\FakeRoundStateCA2040True.cs" />
+    <Compile Include="GetPossibleCardsToPlay_Should.cs" />
     <Compile Include="IsValid_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

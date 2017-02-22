@@ -10,6 +10,6 @@
     {
         bool IsValid(IPlayerAction action, IPlayerTurnContext context, ICollection<Card> playerCards);
 
-        ICollection<Card> GetPossibleCardsToPlay(PlayerTurnContext context, ICollection<Card> playerCards);
+        ICollection<Card> GetPossibleCardsToPlay(IPlayerTurnContext context, ICollection<Card> playerCards);
     }
 }
