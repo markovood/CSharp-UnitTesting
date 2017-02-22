@@ -11,7 +11,6 @@ using PlayerActionValidatorTests.Fakes;
 
 namespace PlayerActionValidatorTests
 {
-    // TODO: Apply these tests to the original unchanged project
     [TestFixture]
     public class IsValid_Should
     {
