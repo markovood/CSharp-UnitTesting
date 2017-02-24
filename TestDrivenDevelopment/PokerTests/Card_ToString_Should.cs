@@ -4,7 +4,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class Card_Should
+    public class Card_ToString_Should
     {
         [Test]
         public void ReturnCardDescriptionWithFaceFirst_WhenToStringIsInvoked()

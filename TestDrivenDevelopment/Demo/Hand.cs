@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Poker
+﻿namespace Poker
 {
+    using System.Collections.Generic;
+
     public class Hand : IHand
     {
         public IList<ICard> Cards { get; private set; }
@@ -14,7 +13,7 @@ namespace Poker
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return string.Join(", ", this.Cards);
         }
     }
 }

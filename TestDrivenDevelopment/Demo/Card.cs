@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Poker
+﻿namespace Poker
 {
     public class Card : ICard
     {
