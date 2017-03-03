@@ -134,13 +134,13 @@ namespace Poker
             }
 
             var cards = hand.Cards;
-            if (NumberOfAKind(ref cards) < 4)
+            if (NumberOfAKind(ref cards) == 4)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
 
