@@ -56,7 +56,14 @@
     <Compile Include="HandTests\Hand_ToString_Should.cs" />
     <Compile Include="PokerHandsCheckerTests\IsFlush_Should.cs" />
     <Compile Include="PokerHandsCheckerTests\IsFourOfAKind_Should.cs" />
+    <Compile Include="PokerHandsCheckerTests\IsFullHouse_Should.cs" />
+    <Compile Include="PokerHandsCheckerTests\IsHighCard_Should.cs" />
+    <Compile Include="PokerHandsCheckerTests\IsOnePair_Should.cs" />
+    <Compile Include="PokerHandsCheckerTests\IsStraightFlush_Should.cs" />
+    <Compile Include="PokerHandsCheckerTests\IsThreeOfAKind_Should.cs" />
+    <Compile Include="PokerHandsCheckerTests\IsTwoPair_Should.cs" />
     <Compile Include="PokerHandsCheckerTests\IsValidHand_Should.cs" />
+    <Compile Include="PokerHandsCheckerTests\IsStraight_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
