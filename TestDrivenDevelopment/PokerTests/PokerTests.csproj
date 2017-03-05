@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="CardTests\Card_ToString_Should.cs" />
     <Compile Include="HandTests\Hand_ToString_Should.cs" />
+    <Compile Include="PokerHandsCheckerTests\CompareHands_Should.cs" />
     <Compile Include="PokerHandsCheckerTests\IsFlush_Should.cs" />
     <Compile Include="PokerHandsCheckerTests\IsFourOfAKind_Should.cs" />
     <Compile Include="PokerHandsCheckerTests\IsFullHouse_Should.cs" />

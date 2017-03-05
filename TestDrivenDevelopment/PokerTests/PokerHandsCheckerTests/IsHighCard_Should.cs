@@ -71,6 +71,36 @@ namespace PokerTests.PokerHandsCheckerTests
         }
 
         [Test]
+        public void ReturnFalse_WhenHandIsInvalid()
+        {
+            // Arrange
+            var handChecker = new PokerHandsChecker();
+
+            var handMock = new Mock<IHand>();
+            var card1Mock = new Mock<ICard>();
+            var card2Mock = new Mock<ICard>();
+            var card3Mock = new Mock<ICard>();
+            var card4Mock = new Mock<ICard>();
+
+            var cardsStub = new List<ICard>
+            {
+                card1Mock.Object,
+                card2Mock.Object,
+                card3Mock.Object,
+                card4Mock.Object,
+                card4Mock.Object
+            };
+
+            handMock.Setup(h => h.Cards).Returns(cardsStub);
+
+            // Act
+            var result = handChecker.IsHighCard(handMock.Object);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [Test]
         public void ReturnFalse_WhenAtLeast2CardsAreSameFace()
         {
             // Arrange
@@ -107,7 +137,7 @@ namespace PokerTests.PokerHandsCheckerTests
         }
 
         [Test]
-        public void ReturnTrue_WhenAllCardsAreDifferentFace()
+        public void ReturnTrue_WhenAllCardsAreDifferentFace_AndNotSequential()
         {
             // Arrange
             var handChecker = new PokerHandsChecker();
@@ -130,7 +160,7 @@ namespace PokerTests.PokerHandsCheckerTests
 
             handMock.Setup(h => h.Cards).Returns(cardsStub);
             card1Mock.SetupGet(c => c.Face).Returns(CardFace.King);
-            card2Mock.SetupGet(c => c.Face).Returns(CardFace.Queen);
+            card2Mock.SetupGet(c => c.Face).Returns(CardFace.Seven);
             card3Mock.SetupGet(c => c.Face).Returns(CardFace.Jack);
             card4Mock.SetupGet(c => c.Face).Returns(CardFace.Ten);
             card5Mock.SetupGet(c => c.Face).Returns(CardFace.Ace);

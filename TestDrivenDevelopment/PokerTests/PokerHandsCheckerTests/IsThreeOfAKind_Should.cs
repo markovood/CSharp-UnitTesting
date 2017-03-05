@@ -69,6 +69,36 @@ namespace PokerTests.PokerHandsCheckerTests
         }
 
         [Test]
+        public void ReturnFalse_WhenHandIsInvalid()
+        {
+            // Arrange
+            var handChecker = new PokerHandsChecker();
+
+            var handMock = new Mock<IHand>();
+            var card1Mock = new Mock<ICard>();
+            var card2Mock = new Mock<ICard>();
+            var card3Mock = new Mock<ICard>();
+            var card4Mock = new Mock<ICard>();
+
+            var cardsStub = new List<ICard>
+            {
+                card1Mock.Object,
+                card2Mock.Object,
+                card3Mock.Object,
+                card4Mock.Object,
+                card4Mock.Object
+            };
+
+            handMock.Setup(h => h.Cards).Returns(cardsStub);
+
+            // Act
+            var result = handChecker.IsThreeOfAKind(handMock.Object);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [Test]
         public void ReturnTrue_WhenHandContains3CardsOfTheSameFaceAnd2CardsOfDifferentFaces()
         {
             // Arrange

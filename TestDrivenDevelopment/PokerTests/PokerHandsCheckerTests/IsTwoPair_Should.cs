@@ -3,9 +3,6 @@ using NUnit.Framework;
 using Poker;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PokerTests.PokerHandsCheckerTests
 {
@@ -69,6 +66,36 @@ namespace PokerTests.PokerHandsCheckerTests
 
             // Act & Assert
             Assert.Throws<ApplicationException>(() => handChecker.IsTwoPair(handMock.Object));
+        }
+
+        [Test]
+        public void ReturnFalse_WhenHandIsInvalid()
+        {
+            // Arrange
+            var handChecker = new PokerHandsChecker();
+
+            var handMock = new Mock<IHand>();
+            var card1Mock = new Mock<ICard>();
+            var card2Mock = new Mock<ICard>();
+            var card3Mock = new Mock<ICard>();
+            var card4Mock = new Mock<ICard>();
+
+            var cardsStub = new List<ICard>
+            {
+                card1Mock.Object,
+                card2Mock.Object,
+                card3Mock.Object,
+                card4Mock.Object,
+                card4Mock.Object
+            };
+
+            handMock.Setup(h => h.Cards).Returns(cardsStub);
+
+            // Act
+            var result = handChecker.IsTwoPair(handMock.Object);
+
+            // Assert
+            Assert.IsFalse(result);
         }
 
         [Test]
