@@ -169,5 +169,46 @@ namespace PokerTests.PokerHandsCheckerTests
             // Assert
             Assert.IsTrue(result);
         }
+
+        [Test]
+        public void ReturnFalse_WhenHandCardsAreTheSameSuit_ButAreSequential()
+        {
+            // Arrange
+            var handChecker = new PokerHandsChecker();
+
+            var handMock = new Mock<IHand>();
+            var card1Mock = new Mock<ICard>();
+            var card2Mock = new Mock<ICard>();
+            var card3Mock = new Mock<ICard>();
+            var card4Mock = new Mock<ICard>();
+            var card5Mock = new Mock<ICard>();
+
+            var cardsStub = new List<ICard>
+            {
+                card1Mock.Object,
+                card2Mock.Object,
+                card3Mock.Object,
+                card4Mock.Object,
+                card5Mock.Object
+            };
+
+            handMock.Setup(h => h.Cards).Returns(cardsStub);
+            card1Mock.SetupGet(c => c.Suit).Returns(CardSuit.Diamonds);
+            card1Mock.SetupGet(c => c.Face).Returns(CardFace.Ace);
+            card2Mock.SetupGet(c => c.Suit).Returns(CardSuit.Diamonds);
+            card2Mock.SetupGet(c => c.Face).Returns(CardFace.Queen);
+            card3Mock.SetupGet(c => c.Suit).Returns(CardSuit.Diamonds);
+            card3Mock.SetupGet(c => c.Face).Returns(CardFace.Jack);
+            card4Mock.SetupGet(c => c.Suit).Returns(CardSuit.Diamonds);
+            card4Mock.SetupGet(c => c.Face).Returns(CardFace.King);
+            card5Mock.SetupGet(c => c.Suit).Returns(CardSuit.Diamonds);
+            card5Mock.SetupGet(c => c.Face).Returns(CardFace.Ten);
+
+            // Act
+            var result = handChecker.IsFlush(handMock.Object);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
     }
 }

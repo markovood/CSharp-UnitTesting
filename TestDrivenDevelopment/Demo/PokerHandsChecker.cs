@@ -53,18 +53,65 @@ namespace Poker
             return maxNumberOfAKind;
         }
 
-        private void RemovePair(IList<ICard> cards)
+        private ICard GetCards(IList<ICard> cards, int numberOfCards)
         {
-            for (int i = 0; i < cards.Count - 1; i++)
+            // cards are/must be sorted in advance
+            ICard cardNeeded = null;
+            switch (numberOfCards)
             {
-                var currentCard = cards[i];
-                var nextCard = cards[i + 1];
-                if (currentCard.Face == nextCard.Face)
-                {
-                    cards.Remove(currentCard);
-                    cards.Remove(nextCard);
+                case 2:
+                    for (int i = 0; i < cards.Count - 1; i++)
+                    {
+                        var currentCard = cards[i];
+                        var nextCard = cards[i + 1];
+                        if (currentCard.Face == nextCard.Face)
+                        {
+                            cardNeeded = currentCard;
+                            break;
+                        }
+                    }
                     break;
-                }
+                case 3:
+                    for (int i = 0; i < cards.Count - 2; i++)
+                    {
+                        var currentCard = cards[i];
+                        var nextCard = cards[i + 1];
+                        var nextOfTheNextCard = cards[i + 2];
+                        if (currentCard.Face == nextCard.Face && nextCard.Face == nextOfTheNextCard.Face)
+                        {
+                            cardNeeded = currentCard;
+                            break;
+                        }
+                    }
+                    break;
+                case 4:
+                    for (int i = 0; i < cards.Count - 3; i++)
+                    {
+                        var currentCard = cards[i];
+                        var nextCard = cards[i + 1];
+                        var thirdCard = cards[i + 2];
+                        var fourthCard = cards[i + 3];
+                        if (currentCard.Face == nextCard.Face &&
+                            nextCard.Face == thirdCard.Face &&
+                            thirdCard.Face == fourthCard.Face)
+                        {
+                            cardNeeded = currentCard;
+                            break;
+                        }
+                    }
+                    break;
+            }
+
+            return cardNeeded;
+        }
+
+        private void RemoveCards(ICard cardToRemove, IList<ICard> cards, int repeat)
+        {
+            // cards must be sorted in advance
+            int index = cards.IndexOf(cardToRemove);
+            for (int i = 0; i < repeat; i++)
+            {
+                cards.RemoveAt(index);
             }
         }
 
@@ -81,7 +128,7 @@ namespace Poker
             else if (IsStraightFlush(hand)) return 9;
             else return 0;
         }
-        
+
         public bool IsValidHand(IHand hand)
         {
             // A hand is valid when it consists of exactly 5 different cards.
@@ -171,17 +218,35 @@ namespace Poker
         {
             if (IsValidHand(hand))
             {
+                bool isFlush = true;
                 for (int i = 0; i < hand.Cards.Count - 1; i++)
                 {
                     var currentCard = hand.Cards[i];
                     var nextCard = hand.Cards[i + 1];
                     if (currentCard.Suit != nextCard.Suit)
                     {
-                        return false;
+                        isFlush = false;
+                        break;
                     }
                 }
 
-                return true;
+                if (isFlush)
+                {
+                    // check if cards are sequential
+                    var cards = hand.Cards.OrderByDescending(c => c.Face).ToList();
+                    for (int i = 0; i < cards.Count - 1; i++)
+                    {
+                        var currentCard = cards[i];
+                        var nextCard = cards[i + 1];
+                        if (Math.Abs(currentCard.Face - nextCard.Face) != 1)
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+                else return false;
             }
             else return false;
         }
@@ -250,7 +315,8 @@ namespace Poker
                 if (NumberOfAKind(ref cards) == 2)
                 {
                     // remove the pair
-                    RemovePair(cards);
+                    var pairCard = GetCards(cards, 2);
+                    RemoveCards(pairCard, cards, 2);
                     // now only 3 cards left
                     if (NumberOfAKind(ref cards) == 2)
                     {
@@ -271,7 +337,8 @@ namespace Poker
                 if (NumberOfAKind(ref cards) == 2)
                 {
                     // get the pair & remove it
-                    RemovePair(cards);
+                    var pairCard = GetCards(cards, 2);
+                    RemoveCards(pairCard, cards, 2);
 
                     // check if rest of cards are different face
                     if (NumberOfAKind(ref cards) > 1) return false;
@@ -303,17 +370,34 @@ namespace Poker
                 }
 
                 // check weather the cards are sequential
+                bool isHighCard = false;
                 for (int i = 0; i < cards.Count - 1; i++)
                 {
                     var currentCard = cards[i];
                     var nextCard = cards[i + 1];
                     if (Math.Abs(currentCard.Face - nextCard.Face) != 1)
                     {
-                        return true;
+                        isHighCard = true;
+                        break;
                     }
                 }
 
-                return false;
+                // check if cards are same suit
+                if (isHighCard)
+                {
+                    for (int i = 0; i < cards.Count - 1; i++)
+                    {
+                        var currentCard = cards[i];
+                        var nextCard = cards[i + 1];
+                        if (currentCard.Suit != nextCard.Suit)
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+                else return false;
             }
             else return false;
         }
@@ -334,7 +418,173 @@ namespace Poker
 
             if (firstHandValue > secondHandValue) return -1;
             else if (secondHandValue > firstHandValue) return 1;
-            else return 0; // TODO: IMPLEMENT comparison of hands of the same kind
+            else
+            {
+                //IMPLEMENT comparison of hands of the same kind
+                var firstHandCards = firstHand.Cards.OrderByDescending(c => c.Face).ToList();
+                var secondHandCards = secondHand.Cards.OrderByDescending(c => c.Face).ToList();
+                int returnValue = int.MinValue;
+                switch (firstHandValue)
+                {
+                    case 1: // HighCard
+                        returnValue = CompareHighCards(firstHandCards, secondHandCards);
+                        break;
+                    case 2: // OnePair
+                        returnValue = CompareOnePairCards(firstHandCards, secondHandCards);
+                        break;
+                    case 3: // TwoPair
+                        returnValue = CompareTwoPairCards(firstHandCards, secondHandCards);
+                        break;
+                    case 4: // ThreeOfAKind
+                        returnValue = CompareThreeOfAKindCards(firstHandCards, secondHandCards);
+                        break;
+                    case 5: // Straight
+                        returnValue = CompareStraightCards(firstHandCards, secondHandCards);
+                        break;
+                    case 6: // Flush
+                        returnValue = CompareFlushCards(firstHandCards, secondHandCards);
+                        break;
+                    case 7: // FullHouse
+                        returnValue = CompareFullHouseCards(firstHandCards, secondHandCards);
+                        break;
+                    case 8: // FourOfAKind
+                        returnValue = CompareFourOfAKindCards(firstHandCards, secondHandCards);
+                        break;
+                    case 9: // StraightFlush
+                        returnValue = CompareStraightFlushCards(firstHandCards, secondHandCards);
+                        break;
+                }
+
+                return returnValue;
+            }
+        }
+
+        private int CompareStraightFlushCards(IList<ICard> firstHandCards, IList<ICard> secondHandCards)
+        {
+            return CompareStraightCards(firstHandCards, secondHandCards);
+        }
+
+        private int CompareFourOfAKindCards(IList<ICard> firstHandCards, IList<ICard> secondHandCards)
+        {
+            // get the quadruplet
+            var firstHandQuadrupletCard = GetCards(firstHandCards, 4);
+            var secondHandQuadrupletCard = GetCards(secondHandCards, 4);
+            // compare it
+            if (firstHandQuadrupletCard.Face > secondHandQuadrupletCard.Face) return -1;
+            else if (firstHandQuadrupletCard.Face < secondHandQuadrupletCard.Face) return 1;
+            else
+            {
+                // remove the quadruplet & compare the only card left(the kicker)
+                RemoveCards(firstHandQuadrupletCard, firstHandCards, 4);
+                RemoveCards(secondHandQuadrupletCard, secondHandCards, 4);
+                if (firstHandCards.First().Face > secondHandCards.First().Face) return -1;
+                else if (firstHandCards.First().Face < secondHandCards.First().Face) return 1;
+                else return 0;
+            }
+        }
+
+        private int CompareFullHouseCards(IList<ICard> firstHandCards, IList<ICard> secondHandCards)
+        {
+            // get the triplet
+            var firstHandTripletCard = GetCards(firstHandCards, 3);
+            var secondHandTripletCard = GetCards(secondHandCards, 3);
+            // compare it
+            if (firstHandTripletCard.Face > secondHandTripletCard.Face) return -1;
+            else if (firstHandTripletCard.Face < secondHandTripletCard.Face) return 1;
+            else
+            {
+                // remove triplets
+                RemoveCards(firstHandTripletCard, firstHandCards, 3);
+                RemoveCards(secondHandTripletCard, secondHandCards, 3);
+                // the triplets are equal, so compare the pairs
+                if (firstHandCards[0].Face > secondHandCards[0].Face) return -1;
+                else if (firstHandCards[0].Face < secondHandCards[0].Face) return 1;
+                else return 0;
+            }
+        }
+
+        private int CompareFlushCards(IList<ICard> firstHandCards, IList<ICard> secondHandCards)
+        {
+            return CompareHighCards(firstHandCards, secondHandCards);
+        }
+
+        private int CompareStraightCards(IList<ICard> firstHandCards, IList<ICard> secondHandCards)
+        {
+            var firstHandFirstCard = firstHandCards.First();
+            var secondHandFirstCard = secondHandCards.First();
+            if (firstHandFirstCard.Face > secondHandFirstCard.Face) return -1;
+            else if (firstHandFirstCard.Face < secondHandFirstCard.Face) return 1;
+            else return 0;
+        }
+
+        private int CompareThreeOfAKindCards(IList<ICard> firstHandCards, IList<ICard> secondHandCards)
+        {
+            // get the triplet
+            var firstHandTripletCard = GetCards(firstHandCards, 3);
+            var secondHandTripletCard = GetCards(secondHandCards, 3);
+            // remove it
+            RemoveCards(firstHandTripletCard, firstHandCards, 3);
+            RemoveCards(secondHandTripletCard, secondHandCards, 3);
+            // compare it
+            if (firstHandTripletCard.Face > secondHandTripletCard.Face) return -1;
+            else if (firstHandTripletCard.Face < secondHandTripletCard.Face) return 1;
+            else
+            {
+                // if triplets are equal compare kickers
+                if (firstHandCards[0].Face > secondHandCards[0].Face) return -1;
+                else if (firstHandCards[0].Face < secondHandCards[0].Face) return 1;
+                else
+                {
+                    if (firstHandCards[1].Face > secondHandCards[1].Face) return -1;
+                    else if (firstHandCards[1].Face < secondHandCards[1].Face) return 1;
+                    else return 0;
+                }
+            }
+
+        }
+
+        private int CompareTwoPairCards(IList<ICard> firstHandCards, IList<ICard> secondHandCards)
+        {
+            int resultOfFirstPairComparison;
+            var firstPairCard = GetCards(firstHandCards, 2);
+            var secondPairCard = GetCards(secondHandCards, 2);
+            if (firstPairCard.Face > secondPairCard.Face) resultOfFirstPairComparison = -1;
+            else if (firstPairCard.Face < secondPairCard.Face) resultOfFirstPairComparison = 1;
+            else resultOfFirstPairComparison = 0;
+            RemoveCards(firstPairCard, firstHandCards, 2);
+            RemoveCards(secondPairCard, secondHandCards, 2);
+
+            if (resultOfFirstPairComparison == 0)
+            {
+                return CompareOnePairCards(firstHandCards, secondHandCards);
+            }
+            else return resultOfFirstPairComparison;
+        }
+
+        private int CompareOnePairCards(IList<ICard> firstHandCards, IList<ICard> secondHandCards)
+        {
+            var firstPairCard = GetCards(firstHandCards, 2);
+            var secondPairCard = GetCards(secondHandCards, 2);
+
+            if (firstPairCard.Face > secondPairCard.Face) return -1;
+            else if (firstPairCard.Face < secondPairCard.Face) return 1;
+            else
+            {
+                RemoveCards(firstPairCard, firstHandCards, 2);
+                RemoveCards(secondPairCard, secondHandCards, 2);
+                return CompareHighCards(firstHandCards, secondHandCards);
+            }
+        }
+
+        private int CompareHighCards(IList<ICard> firstHandCards, IList<ICard> secondHandCards)
+        {
+            for (int i = 0; i < firstHandCards.Count; i++)
+            {
+                if (firstHandCards[i].Face > secondHandCards[i].Face) return -1;
+                else if (firstHandCards[i].Face < secondHandCards[i].Face) return 1;
+            }
+
+            return 0;
         }
     }
 }
