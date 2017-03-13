@@ -34,7 +34,7 @@ namespace Academy.Core.Factories
 
             Initiative parsedInitiativeAsEnum;
             Enum.TryParse<Initiative>(initiative, out parsedInitiativeAsEnum);
-
+            
             return new Season(parsedStartingYear, parsedEngingYear, parsedInitiativeAsEnum);
         }
 
@@ -47,7 +47,7 @@ namespace Academy.Core.Factories
         }
 
         public ITrainer CreateTrainer(string username, string technologies)
-        {            
+        {
             return new Trainer(username, technologies.Split(','));
         }
 

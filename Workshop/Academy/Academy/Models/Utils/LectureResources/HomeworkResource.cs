@@ -6,7 +6,7 @@ namespace Academy.Models.Utils.LectureResources
     public class HomeworkResource : Resource
     {
         public HomeworkResource(string name, string url, DateTime dueDate) : base(name, url)
-        {            
+        {
             this.DueDate = dueDate;
         }
 

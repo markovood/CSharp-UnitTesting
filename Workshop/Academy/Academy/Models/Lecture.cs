@@ -26,8 +26,8 @@ namespace Academy.Models
             }
             set
             {
-                if (string.IsNullOrWhiteSpace(value) 
-                    || value.Length < 5 
+                if (string.IsNullOrWhiteSpace(value)
+                    || value.Length < 5
                     || value.Length > 30)
                 {
                     throw new ArgumentException("Lecture's name should be between 5 and 30 symbols long!");

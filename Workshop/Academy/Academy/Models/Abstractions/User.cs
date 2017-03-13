@@ -19,8 +19,8 @@ namespace Academy.Models.Abstractions
             }
             set
             {
-                if (string.IsNullOrWhiteSpace(value) 
-                    || value.Length < 3 
+                if (string.IsNullOrWhiteSpace(value)
+                    || value.Length < 3
                     || value.Length > 16)
                 {
                     throw new ArgumentException("User's username should be between 3 and 16 symbols long!");

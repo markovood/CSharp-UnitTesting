@@ -10,10 +10,10 @@ namespace Academy.Models
     {
         private string name;
         private int lecturesPerWeek;
-        private DateTime startingDate;
-        private DateTime endingDate;
+        private DateTime? startingDate;
+        private DateTime? endingDate;
 
-        public Course(string name, int lecturesPerWeek, DateTime starting, DateTime ending)
+        public Course(string name, int lecturesPerWeek, DateTime? starting, DateTime? ending)
         {
             this.Name = name;
             this.LecturesPerWeek = lecturesPerWeek;
@@ -33,8 +33,8 @@ namespace Academy.Models
             }
             set
             {
-                if (string.IsNullOrWhiteSpace(value) 
-                    || value.Length < 3 
+                if (string.IsNullOrWhiteSpace(value)
+                    || value.Length < 3
                     || value.Length > 45)
                 {
                     throw new ArgumentException("The name of the course must be between 3 and 45 symbols!");
@@ -61,7 +61,7 @@ namespace Academy.Models
             }
         }
 
-        public DateTime StartingDate
+        public DateTime? StartingDate
         {
             get
             {
@@ -78,7 +78,7 @@ namespace Academy.Models
             }
         }
 
-        public DateTime EndingDate
+        public DateTime? EndingDate
         {
             get
             {

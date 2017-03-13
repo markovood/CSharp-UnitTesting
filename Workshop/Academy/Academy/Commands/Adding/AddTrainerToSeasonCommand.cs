@@ -13,7 +13,7 @@ namespace Academy.Commands.Adding
 
         public AddTrainerToSeasonCommand(IAcademyFactory factory, IEngine engine)
         {
-            if(factory == null)
+            if (factory == null)
             {
                 throw new ArgumentNullException("Factory cannot be null.");
             }

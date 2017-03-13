@@ -1,5 +1,5 @@
-﻿using System;
-using Academy.Models.Contracts;
+﻿using Academy.Models.Contracts;
+using System;
 using System.Text;
 
 namespace Academy.Models.Utils.LectureResources

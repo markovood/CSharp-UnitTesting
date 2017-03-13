@@ -1,5 +1,4 @@
 ﻿using Academy.Models.Enums;
-using System;
 using System.Collections.Generic;
 
 namespace Academy.Models.Contracts

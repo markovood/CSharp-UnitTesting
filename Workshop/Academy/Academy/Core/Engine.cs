@@ -18,8 +18,7 @@ namespace Academy.Core
         // private because of Singleton design pattern
         private Engine()
         {
-            // Setting default providers
-            // Can be substituted from their property
+            // Setting default providers Can be substituted from their property
             this.Reader = new ConsoleReader();
             this.Writer = new ConsoleWriter();
             this.Parser = new CommandParser();
@@ -45,13 +44,11 @@ namespace Academy.Core
 
         public IParser Parser { get; set; }
 
-
         public IList<ISeason> Seasons { get; private set; }
 
         public IList<IStudent> Students { get; private set; }
 
         public IList<ITrainer> Trainers { get; private set; }
-
 
         public void Start()
         {

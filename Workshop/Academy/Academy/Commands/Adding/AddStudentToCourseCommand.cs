@@ -8,15 +8,15 @@ namespace Academy.Commands.Adding
 {
     internal class AddStudentToCourseCommand : ICommand
     {
-        private readonly IAcademyFactory factory;
-        private readonly IEngine engine;
+        protected readonly IAcademyFactory factory;
+        protected readonly IEngine engine;
 
         public AddStudentToCourseCommand(IAcademyFactory factory, IEngine engine)
         {
             if (factory == null)
             {
                 throw new ArgumentNullException("Factory cannot be null.");
-            }   
+            }
 
             if (engine == null)
             {
@@ -44,9 +44,11 @@ namespace Academy.Commands.Adding
                 case "onsite":
                     course.OnsiteStudents.Add(student);
                     break;
+
                 case "online":
                     course.OnlineStudents.Add(student);
                     break;
+
                 default:
                     throw new ArgumentException($"Cannot add student to course {seasonId}.{course.Name}. Invalid course form {form}!");
             }

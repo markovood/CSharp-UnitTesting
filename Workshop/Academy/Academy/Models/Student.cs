@@ -38,7 +38,7 @@ namespace Academy.Models
             else
             {
                 builder.AppendLine("  * User has no course results!");
-            }            
+            }
 
             return builder.ToString().TrimEnd();
         }

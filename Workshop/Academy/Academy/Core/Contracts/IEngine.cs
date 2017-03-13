@@ -13,8 +13,7 @@ namespace Academy.Core.Contracts
 
         IParser Parser { get; set; }
 
-
-        IList<ISeason> Seasons { get;  }
+        IList<ISeason> Seasons { get; }
 
         IList<IStudent> Students { get; }
 
