@@ -28,9 +28,9 @@ namespace IntergalacticTravel.Tests
             var resourcesObj = factory.GetResources(command);
 
             // Assert
-            Assert.AreEqual(expectedBronzeCoins, resourcesObj.BronzeCoins);
-            Assert.AreEqual(expectedSilverCoins, resourcesObj.SilverCoins);
-            Assert.AreEqual(expectedGoldCoins, resourcesObj.GoldCoins);
+            Assert.AreEqual(expectedBronzeCoins, resourcesObj.BronzeCoins, "bronzeCoins");
+            Assert.AreEqual(expectedSilverCoins, resourcesObj.SilverCoins, "SilverCoins");
+            Assert.AreEqual(expectedGoldCoins, resourcesObj.GoldCoins, "goldCoins");
         }
 
         [TestCase("create resources x y z")]
