@@ -56,7 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\PackageTests.cs" />
     <Compile Include="Models\PackageVersionTests.cs" />
+    <Compile Include="Models\ProjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
