@@ -105,8 +105,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BusinessOwnerTests.cs" />
+    <Compile Include="Fakes\TeleportStationFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourcesFactoryTests.cs" />
+    <Compile Include="TeleportStationTests.cs" />
     <Compile Include="UnitsFactoryTests.cs" />
     <Compile Include="UnitTests.cs" />
   </ItemGroup>
