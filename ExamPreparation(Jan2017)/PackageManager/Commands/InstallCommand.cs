@@ -8,8 +8,8 @@ namespace PackageManager.Commands
 {
     internal class InstallCommand : ICommand
     {
-        private IInstaller<IPackage> installer;
-        private IPackage package;
+        protected IInstaller<IPackage> installer;
+        protected IPackage package;
 
         public InstallCommand(IInstaller<IPackage> installer, IPackage package)
         {

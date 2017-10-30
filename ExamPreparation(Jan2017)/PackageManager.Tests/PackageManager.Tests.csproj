@@ -56,13 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Fakes\InstallCommandFake.cs" />
+    <Compile Include="Commands\InstallCommandTests.cs" />
     <Compile Include="Models\PackageTests.cs" />
     <Compile Include="Models\PackageVersionTests.cs" />
     <Compile Include="Models\ProjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Core\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
