@@ -11,8 +11,8 @@ namespace PackageManager.Repositories
 {
     public class PackageRepository : IRepository<IPackage>
     {
-        private ICollection<IPackage> packages;
-        private ILogger logger;
+        protected ICollection<IPackage> packages;
+        protected ILogger logger;
 
         public PackageRepository(ILogger logger, ICollection<IPackage> packages = null)
         {
