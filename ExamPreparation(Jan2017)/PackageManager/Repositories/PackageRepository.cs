@@ -89,7 +89,7 @@ namespace PackageManager.Repositories
             {
                 this.logger.Log(string.Format("{0}: The package is a dependency and could not be removed!", package.Name));
                 this.logger.Log("Aborting");
-                this.logger.Log("Please remove the dependencies first!");
+                this.logger.Log("Please remove the dependencies first!");                
             }
 
             this.packages.Remove(packageFound);
@@ -103,8 +103,7 @@ namespace PackageManager.Repositories
                 throw new ArgumentNullException("The package cannot be null");
             }
 
-            var packageFound = this.packages
-                .SingleOrDefault(x => x.Name == package.Name);
+            var packageFound = this.packages.SingleOrDefault(x => x.Name == package.Name);
 
             if (packageFound == null)
             {
@@ -134,17 +133,8 @@ namespace PackageManager.Repositories
         // Gets all the packages in the repository
         public IEnumerable<IPackage> GetAll()
         {
-            #region
-            this.AddPackage();
-            #endregion
             this.logger.Log("All packages");
             return this.packages;
-        }
-
-        // Temporary method for test
-        private void AddPackage()
-        {
-            this.packages.Add(new Package("test", new PackageVersion(1, 1, 1, VersionType.alpha)));
         }
     }
 }
